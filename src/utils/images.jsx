@@ -17,6 +17,26 @@ import icon_cpd_online from "@/assets/images/icons/08_cpd_online.png";
 import icon_accredited_institutions from "@/assets/images/icons/09_accredited_institutions.png";
 import portrait from "@/assets/images/sections/portrait.png";
 
+// General News Images
+import news_one from "@/assets/images/general_news_imgs/general_news_img_one.png";
+import news_two from "@/assets/images/general_news_imgs/general_news_img_two.png";
+import news_three from "@/assets/images/general_news_imgs/general_news_img_three.png";
+import news_four from "@/assets/images/general_news_imgs/general_news_img_four.png";
+import news_five from "@/assets/images/general_news_imgs/general_news_img_five.png";
+
+// Events Images
+import event_one from "@/assets/images/events_imgs/event_img_one.png";
+import event_two from "@/assets/images/events_imgs/event_img_two.png";
+import event_three from "@/assets/images/events_imgs/event_img_three.png";
+import event_four from "@/assets/images/events_imgs/event_img_four.png";
+import partner_adb from "@/assets/images/partners/adb.png";
+import partner_cinop from "@/assets/images/partners/cinop.png";
+import partner_gcb from "@/assets/images/partners/gcb.png";
+import partner_knust from "@/assets/images/partners/knust.png";
+import partner_five from "@/assets/images/partners/patner_five.png";
+import partner_six from "@/assets/images/partners/partner_6.png";
+
+
 export {
   coat_of_arm_alt,
   coat_of_arms,
@@ -36,4 +56,19 @@ export {
   icon_cpd_online,
   icon_accredited_institutions,
   portrait,
+  news_one,
+  news_two,
+  news_three,
+  news_four,
+  news_five,
+  event_one,
+  event_two,
+  event_three,
+  event_four,
+  partner_adb,
+  partner_cinop,
+  partner_gcb,
+  partner_knust,
+  partner_five,
+  partner_six,
 };

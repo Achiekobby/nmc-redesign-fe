@@ -80,6 +80,15 @@
   --container-8xl: 96rem;
 }
 
+@keyframes partners-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 body {
   font-family:"Onest", sans-serif;
   padding: 0;

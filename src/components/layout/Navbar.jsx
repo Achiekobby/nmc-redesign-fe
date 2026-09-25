@@ -1,6 +1,31 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router'
-import { ArrowRight, ChevronDown, Mail, Menu, Phone, Search, X } from 'lucide-react'
+import {
+  ArrowRight,
+  BarChart3,
+  BookOpen,
+  Building2,
+  Calendar,
+  CheckCircle2,
+  ChevronDown,
+  ChevronRight,
+  ClipboardList,
+  FileText,
+  GraduationCap,
+  HelpCircle,
+  Mail,
+  Menu,
+  Monitor,
+  Phone,
+  RefreshCw,
+  Search,
+  Settings,
+  ShieldCheck,
+  User,
+  Users,
+  X,
+} from 'lucide-react'
 import { coat_of_arms, logo } from '@/utils/images'
 
 const phones = [
@@ -26,29 +51,139 @@ const primaryLinks = [
   { label: 'Home', to: '/' },
   {
     label: 'Who We Are',
-    children: [
-      { label: 'About the Council', to: '/who-we-are' },
-      { label: 'Council Members', to: '/who-we-are/council' },
-      { label: 'Management', to: '/who-we-are/management' },
-      { label: 'Departments', to: '/who-we-are/departments' },
+    columns: [
+      {
+        title: 'Council Members',
+        description: 'Meet the Council and its governing members',
+        icon: Users,
+        iconClass: 'bg-[#E11D2E] text-white',
+        links: [
+          { label: 'Board Members', to: '/who-we-are/board' },
+          { label: 'Committees', to: '/who-we-are/committees' },
+          { label: 'Council Meetings', to: '/who-we-are/meetings' },
+        ],
+      },
+      {
+        title: 'Leadership',
+        description: 'Our executive leadership and management',
+        icon: User,
+        iconClass: 'bg-[#1C45E6] text-white',
+        links: [
+          { label: 'Registrar / CEO', to: '/who-we-are/registrar' },
+          { label: 'Management', to: '/who-we-are/management' },
+          { label: 'Departments', to: '/who-we-are/departments' },
+        ],
+      },
+      {
+        title: 'About the Council',
+        description: 'Learn about our mandate, history and purpose',
+        icon: BookOpen,
+        iconClass: 'bg-[#15803D] text-white',
+        links: [
+          { label: 'History', to: '/who-we-are/history' },
+          { label: 'Mission & Vision', to: '/who-we-are/mission' },
+          { label: 'Mandate and Functions', to: '/who-we-are/mandate' },
+          { label: 'Strategic Plan', to: '/who-we-are/strategic-plan' },
+        ],
+      },
     ],
   },
   {
     label: 'Services',
-    children: [
-      { label: 'Indexing', to: '/services/indexing' },
-      { label: 'Registration', to: '/services/registration' },
-      { label: 'License Renewal', to: '/services/license-renewal' },
-      { label: 'Verification', to: '/services/verification' },
-      { label: 'Examination & Licensing', to: '/services/examination' },
-      { label: 'Accreditation', to: '/services/accreditation' },
+    columns: [
+      {
+        title: 'General Services',
+        description: 'Core regulatory services for practitioners and institutions',
+        icon: Settings,
+        iconClass: 'bg-[#1C45E6] text-white',
+        tone: 'text-[#1236C2]',
+        links: [
+          { label: 'Indexing', to: '/services/indexing', icon: ClipboardList },
+          { label: 'Registration', to: '/services/registration', icon: User },
+          { label: 'Verification', to: '/services/verification', icon: ShieldCheck },
+          { label: 'Examination & Licensing', to: '/services/examination', icon: FileText },
+          { label: 'Accreditation', to: '/services/accreditation', icon: Building2 },
+        ],
+      },
+      {
+        title: 'Online Services',
+        description: 'Access our online platforms and digital services',
+        icon: Monitor,
+        iconClass: 'bg-[#E11D2E] text-white',
+        tone: 'text-[#C01025]',
+        links: [
+          { label: 'Online Indexing', to: '/services/online-indexing', icon: Monitor },
+          { label: 'Examination Registration', to: '/services/examination-registration', icon: FileText },
+          { label: 'License Renewal', to: '/services/license-renewal', icon: RefreshCw },
+          { label: 'Results Checker', to: '/services/results', icon: BarChart3 },
+          { label: 'Induction Registration', to: '/services/induction-registration', icon: User },
+          { label: 'Licensing Examination', to: '/services/licensing-examination', icon: ShieldCheck },
+          { label: 'Find Accredited Institutions', to: '/services/accredited-institutions', icon: Building2 },
+        ],
+      },
+      {
+        title: 'Apply Online',
+        description: 'Submit applications for examiner roles and CPD',
+        icon: ClipboardList,
+        iconClass: 'bg-[#15803D] text-white',
+        tone: 'text-[#166534]',
+        links: [
+          { label: 'Become an Examiner', to: '/services/become-an-examiner', icon: User },
+          { label: 'CPD Online', to: '/services/cpd', icon: CheckCircle2 },
+        ],
+      },
+      {
+        title: 'E-Learning',
+        description: 'Manuals, tutorials and practice guidance',
+        icon: BookOpen,
+        iconClass: 'bg-[#D97706] text-white',
+        tone: 'text-[#B45309]',
+        links: [
+          { label: 'Procedure Manual', to: '/e-learning/procedure-manual', icon: FileText },
+          { label: 'Exam Registration Tutorial', to: '/e-learning/exam-registration-tutorial', icon: Monitor },
+          { label: 'Procedure Manual (Post-Basic Programs)', to: '/e-learning/procedure-manual-post-basic', icon: BookOpen },
+          { label: 'Scope of Practice', to: '/e-learning/scope-of-practice', icon: ClipboardList },
+        ],
+      },
     ],
   },
   { label: 'News', to: '/news' },
-  { label: 'FAQs', to: '/faqs' },
+  {
+    label: 'FAQs',
+    links: [
+      { label: 'Students', to: '/faqs/students', icon: GraduationCap, iconClass: 'text-[#1236C2]' },
+      { label: 'Practitioners', to: '/faqs/practitioners', icon: User, iconClass: 'text-[#C01025]' },
+      {
+        label: 'Online Examination',
+        to: '/faqs/online-examination',
+        icon: FileText,
+        iconClass: 'text-[#166534]',
+      },
+      {
+        label: 'Examination Timetable',
+        icon: Calendar,
+        iconClass: 'text-[#B45309]',
+      },
+      {
+        label: 'Indexing Guide',
+        to: '/faqs/indexing-guide',
+        icon: HelpCircle,
+        iconClass: 'text-[#6D28D9]',
+      },
+    ],
+  },
   { label: 'Downloads', to: '/downloads' },
   { label: 'Contact', to: '/contact' },
 ]
+
+function hasMenu(item) {
+  return Boolean(item.columns || item.links)
+}
+
+function menuTargets(item) {
+  if (item.columns) return item.columns.flatMap((column) => column.links)
+  return item.links ?? []
+}
 
 const focusRing =
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
@@ -67,6 +202,7 @@ function Navbar() {
   const [openMenu, setOpenMenu] = useState(null)
   const [searchOpen, setSearchOpen] = useState(false)
   const [query, setQuery] = useState('')
+  const reduceMotion = useReducedMotion()
 
   const closeAll = () => {
     setMenuOpen(false)
@@ -90,11 +226,11 @@ function Navbar() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    document.body.style.overflow = menuOpen || openMenu ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
-  }, [menuOpen])
+  }, [menuOpen, openMenu])
 
   useEffect(() => {
     if (searchOpen) searchInputRef.current?.focus()
@@ -159,7 +295,22 @@ function Navbar() {
         Skip to main content
       </a>
 
-      <div ref={utilityClipRef} className="overflow-hidden bg-nmc-blue text-white">
+      <AnimatePresence>
+        {(openMenu || menuOpen) && (
+          <motion.button
+            type="button"
+            aria-label="Close menu"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduceMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 bg-[#07142B]/55"
+            onClick={closeAll}
+          />
+        )}
+      </AnimatePresence>
+
+      <div ref={utilityClipRef} className="relative z-50 overflow-hidden bg-nmc-blue text-white">
         <div ref={utilityRef}>
         <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-5 gap-y-2 px-4 py-2.5 text-[13px] tracking-wide xl:px-8">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -223,7 +374,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="border-b border-neutral-200/80 bg-white shadow-[0_10px_30px_-24px_rgba(23,23,23,0.7)]">
+      <div className="relative z-50 border-b border-neutral-200/80 bg-white shadow-[0_10px_30px_-24px_rgba(23,23,23,0.7)]">
         <div className="mx-auto flex max-w-[1440px] items-center gap-4 px-4 py-2.5 xl:gap-8 xl:px-8">
           <Link to="/" className={`flex shrink-0 items-center rounded-sm ${focusRing}`}>
             <img
@@ -244,12 +395,11 @@ function Navbar() {
 
           <nav aria-label="Primary" className="ml-auto hidden items-center gap-1 xl:flex">
             {primaryLinks.map((item) =>
-              item.children ? (
+              hasMenu(item) ? (
                 <DesktopMenu
                   key={item.label}
                   item={item}
                   open={openMenu === item.label}
-                  onOpen={() => setOpenMenu(item.label)}
                   onClose={() => setOpenMenu(null)}
                   onToggle={() =>
                     setOpenMenu((current) => (current === item.label ? null : item.label))
@@ -359,14 +509,19 @@ function Navbar() {
         </div>
       </div>
 
-      {menuOpen && (
-        <div
+      <AnimatePresence>
+        {menuOpen && (
+        <motion.div
           id={menuId}
+          initial={reduceMotion ? false : { opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-x-0 top-full z-50 max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-neutral-200 bg-white shadow-lg xl:hidden"
         >
           <nav aria-label="Primary" className="mx-auto flex max-w-[1440px] flex-col px-4 py-3">
             {primaryLinks.map((item) =>
-              item.children ? (
+              hasMenu(item) ? (
                 <MobileGroup
                   key={item.label}
                   item={item}
@@ -437,69 +592,199 @@ function Navbar() {
               ))}
             </ul>
           </div>
-        </div>
-      )}
+        </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }
 
-function DesktopMenu({ item, open, onOpen, onClose, onToggle, pathname, onNavigate }) {
-  const active = item.children.some((child) => pathname.startsWith(child.to))
+function DesktopMenu({ item, open, onClose, onToggle, pathname, onNavigate }) {
+  const active = menuTargets(item).some((link) => link.to && pathname.startsWith(link.to))
   const menuId = useId()
+  const wide = Boolean(item.columns)
+  const reduce = useReducedMotion()
 
   return (
     <div
       className="relative"
-      onMouseEnter={onOpen}
-      onMouseLeave={onClose}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) onClose()
       }}
     >
       <button
         type="button"
-        className={linkClass(active)}
+        className={`${linkClass(active)} ${open ? 'bg-[#EEF3FF] text-nmc-ink' : ''}`}
         aria-expanded={open}
         aria-controls={menuId}
         onClick={onToggle}
       >
         {item.label}
         <ChevronDown
-          className={`size-4 motion-safe:transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`size-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           aria-hidden="true"
         />
-        {active && <ActiveBar />}
+        {(active || open) && <ActiveBar />}
       </button>
-      {open && (
-        <div id={menuId} className="absolute top-full left-0 z-20 pt-2">
-          <ul className="min-w-60 overflow-hidden rounded-xl border border-neutral-200 bg-white py-2 shadow-[0_18px_40px_-24px_rgba(23,23,23,0.45)]">
-            {item.children.map((child) => (
-              <li key={child.to}>
-                <NavLink
-                  to={child.to}
-                  onClick={onNavigate}
-                  className={({ isActive }) =>
-                    `mx-2 block rounded-lg px-3 py-2.5 text-sm ${
-                      isActive
-                        ? 'bg-nmc-blue/8 font-semibold text-nmc-blue'
-                        : 'text-nmc-ink hover:bg-neutral-50'
-                    }`
-                  }
-                >
-                  {child.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id={menuId}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: 6 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className={`absolute top-full z-30 pt-4 ${
+              wide
+                ? 'left-1/2 w-[min(1180px,calc(100vw-3rem))] -translate-x-1/2'
+                : 'left-1/2 w-[340px] -translate-x-1/2'
+            }`}
+          >
+            <span
+              className="absolute top-2.5 left-1/2 z-10 size-3.5 -translate-x-1/2 rotate-45 border-t border-l border-[#E6EAF0] bg-white"
+              aria-hidden="true"
+            />
+            <div className="relative overflow-hidden rounded-2xl border border-[#E6EAF0] bg-white p-7 shadow-[0_28px_60px_-24px_rgba(14,35,71,0.38)]">
+              <span
+                className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-nmc-red via-[#1c45e6] to-[#16A34A]"
+                aria-hidden="true"
+              />
+              {item.columns ? (
+                <div className={`grid gap-x-8 gap-y-8 ${item.columns.length > 3 ? 'grid-cols-4' : 'grid-cols-3'}`}>
+                  {item.columns.map((column, index) => (
+                    <MenuColumn
+                      key={column.title}
+                      column={column}
+                      index={index}
+                      pathname={pathname}
+                      onNavigate={onNavigate}
+                      reduce={reduce}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <ul className="-mx-2">
+                  {item.links.map((link, index) => (
+                    <FaqLink
+                      key={link.to}
+                      link={link}
+                      index={index}
+                      pathname={pathname}
+                      onNavigate={onNavigate}
+                      reduce={reduce}
+                    />
+                  ))}
+                </ul>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function MenuColumn({ column, index = 0, pathname, onNavigate, reduce = true }) {
+  const Icon = column.icon
+  return (
+    <motion.div
+      initial={reduce ? false : { opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.28, delay: reduce ? 0 : 0.05 * index, ease: [0.22, 1, 0.36, 1] }}
+      className={index > 0 ? 'border-[#EEF1F6] xl:border-l xl:pl-8' : ''}
+    >
+      <div className="flex items-start gap-3.5">
+        <span className={`grid size-12 shrink-0 place-items-center rounded-2xl shadow-[0_8px_16px_-10px_rgba(14,35,71,0.7)] ${column.iconClass}`}>
+          <Icon className="size-6" strokeWidth={2.4} aria-hidden="true" />
+        </span>
+        <div>
+          <p className="text-base font-bold text-[#0E2347]">{column.title}</p>
+          <p className="mt-1 text-[13px] leading-5 text-[#667085]">{column.description}</p>
+        </div>
+      </div>
+      <ul className="mt-5 space-y-1">
+        {column.links.map((link) => {
+          const LinkIcon = link.icon
+          const current = pathname === link.to
+          return (
+            <li key={link.to}>
+              <NavLink
+                to={link.to}
+                onClick={onNavigate}
+                className={`group flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-sm transition-colors duration-200 ${
+                  current
+                    ? 'bg-[#EEF3FF] font-semibold text-[#1F4BDB]'
+                    : 'text-[#344054] hover:bg-[#F4F7FB] hover:text-[#1F4BDB]'
+                }`}
+              >
+                {LinkIcon && (
+                  <LinkIcon className={`size-[18px] shrink-0 ${column.tone ?? ''}`} strokeWidth={2.4} aria-hidden="true" />
+                )}
+                <span className="flex-1 leading-snug">{link.label}</span>
+                <ChevronRight
+                  className={`size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 ${
+                    current ? 'text-[#1F4BDB]' : 'text-[#98A2B3] group-hover:text-[#1F4BDB]'
+                  }`}
+                />
+              </NavLink>
+            </li>
+          )
+        })}
+      </ul>
+    </motion.div>
+  )
+}
+
+function FaqLink({ link, index = 0, pathname, onNavigate, reduce = true }) {
+  const Icon = link.icon
+  const current = Boolean(link.to) && pathname === link.to
+  const className = `flex items-center gap-3 rounded-xl px-3 py-3 text-sm ${
+    link.to
+      ? `group transition-colors duration-200 ${
+          current
+            ? 'bg-[#EEF3FF] font-semibold text-[#1F4BDB]'
+            : 'text-[#344054] hover:bg-[#EEF3FF] hover:text-[#1F4BDB]'
+        }`
+      : 'cursor-default text-[#98A2B3]'
+  }`
+  const inner = (
+    <>
+      <span className="grid size-8 place-items-center rounded-lg bg-white shadow-[0_1px_2px_rgba(14,35,71,0.06)]">
+        <Icon className={`size-[18px] ${link.iconClass}`} strokeWidth={2.4} aria-hidden="true" />
+      </span>
+      <span className="flex-1">{link.label}</span>
+      {link.to && (
+        <ChevronRight
+          className={`size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 ${
+            current ? 'text-[#1F4BDB]' : 'text-[#98A2B3] group-hover:text-[#1F4BDB]'
+          }`}
+        />
+      )}
+    </>
+  )
+
+  return (
+    <motion.li
+      initial={reduce ? false : { opacity: 0, x: -6 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.22, delay: reduce ? 0 : 0.04 * index, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {link.to ? (
+        <NavLink to={link.to} onClick={onNavigate} className={className}>
+          {inner}
+        </NavLink>
+      ) : (
+        <div className={className} aria-disabled="true">
+          {inner}
         </div>
       )}
-    </div>
+    </motion.li>
   )
 }
 
 function MobileGroup({ item, open, onToggle, pathname, onNavigate }) {
   const menuId = useId()
-  const active = item.children.some((child) => pathname.startsWith(child.to))
+  const active = menuTargets(item).some((link) => link.to && pathname.startsWith(link.to))
 
   return (
     <div className="border-b border-neutral-100">
@@ -514,29 +799,37 @@ function MobileGroup({ item, open, onToggle, pathname, onNavigate }) {
       >
         {item.label}
         <ChevronDown
-          className={`size-4 motion-safe:transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`size-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           aria-hidden="true"
         />
       </button>
-      {open && (
-        <ul id={menuId} className="pb-2 pl-3">
-          {item.children.map((child) => (
-            <li key={child.to}>
-              <NavLink
-                to={child.to}
-                onClick={onNavigate}
-                className={({ isActive }) =>
-                  `flex min-h-11 items-center text-sm ${
-                    isActive ? 'font-semibold text-nmc-blue' : 'text-neutral-700'
-                  }`
-                }
-              >
-                {child.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div
+        id={menuId}
+        className={`grid transition-[grid-template-rows] duration-300 ${
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="space-y-4 pb-3">
+            {item.columns ? (
+              item.columns.map((column) => (
+                <MenuColumn
+                  key={column.title}
+                  column={column}
+                  pathname={pathname}
+                  onNavigate={onNavigate}
+                />
+              ))
+            ) : (
+              <ul>
+                {item.links.map((link) => (
+                  <FaqLink key={link.to} link={link} pathname={pathname} onNavigate={onNavigate} />
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
