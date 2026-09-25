@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import Reveal, { RevealGroup, RevealItem } from '@/components/motion/Reveal'
 import { ArrowRight } from 'lucide-react'
 import { HiAcademicCap, HiShieldCheck, HiUser, HiUserGroup } from 'react-icons/hi2'
 
@@ -42,7 +43,7 @@ function KeyServices() {
   return (
     <section className="bg-[#F4F7FB] pb-12" aria-labelledby="key-services-heading">
       <div className="mx-auto max-w-8xl px-4 sm:px-6">
-        <div className="flex items-start gap-3">
+        <Reveal className="flex items-start gap-3">
           <span className="mt-1 h-6 w-[3px] shrink-0 rounded-full bg-[#E31B23]" aria-hidden="true" />
           <div>
             <h2 id="key-services-heading" className="text-lg font-bold text-[#0E2347] sm:text-xl">
@@ -53,13 +54,13 @@ function KeyServices() {
               practice for quality healthcare delivery in Ghana.
             </p>
           </div>
-        </div>
+        </Reveal>
 
-        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <RevealGroup className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {services.map((service) => {
             const Icon = service.icon
             return (
-            <li key={service.title}>
+            <RevealItem key={service.title} className="h-full">
               <article className="flex h-full gap-4 rounded-2xl border border-[#EEF1F6] bg-white px-5 py-5 shadow-[0_16px_40px_-32px_rgba(14,35,71,0.45)]">
                 <span
                   className={`grid size-12 shrink-0 place-items-center rounded-full ${service.iconClass}`}
@@ -80,10 +81,10 @@ function KeyServices() {
                   </Link>
                 </div>
               </article>
-            </li>
+            </RevealItem>
             )
           })}
-        </ul>
+        </RevealGroup>
       </div>
     </section>
   )

@@ -1,11 +1,12 @@
 import { Link } from 'react-router'
 import { ArrowRight, Megaphone } from 'lucide-react'
+import Reveal from '@/components/motion/Reveal'
 
 function ImportantNotice() {
   return (
     <section className="bg-[#F4F7FB] pt-6 pb-10" aria-labelledby="important-notice-heading">
       <div className="mx-auto max-w-8xl px-4 sm:px-6">
-        <article className="flex flex-col gap-3 rounded-2xl bg-white p-2.5 shadow-[0_18px_40px_-32px_rgba(14,35,71,0.4)] ring-1 ring-slate-200/80 lg:flex-row lg:items-stretch lg:p-2.5">
+        <Reveal as="article" className="flex flex-col gap-3 rounded-2xl bg-white p-2.5 shadow-[0_18px_40px_-32px_rgba(14,35,71,0.4)] ring-1 ring-slate-200/80 lg:flex-row lg:items-stretch lg:p-2.5">
 
           {/* ── Red label ─────────────────────────────────────────── */}
           <div className="flex shrink-0 flex-row items-center gap-3 self-stretch rounded-r-xl bg-[#E31B23] px-5 py-3 text-white [clip-path:polygon(0_14%,100%_0,100%_100%,0_86%)] lg:w-[200px] lg:justify-center">
@@ -89,7 +90,7 @@ function ImportantNotice() {
               </Link>
             </div>
           </div>
-        </article>
+        </Reveal>
       </div>
     </section>
   )

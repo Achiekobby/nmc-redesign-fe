@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import Reveal, { RevealGroup, RevealItem } from '@/components/motion/Reveal'
 import { Calendar, Eye, Folder, MessageCircle, Newspaper } from 'lucide-react'
 import { hero_one, hero_two, logo_alt } from '@/utils/images'
 
@@ -145,7 +146,7 @@ function StudentsNews() {
       </div>
 
       <div className="relative mx-auto max-w-8xl px-4 sm:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2
               id="students-news-heading"
@@ -159,9 +160,9 @@ function StudentsNews() {
             <Newspaper className="size-4 text-[#1D4ED8]" aria-hidden="true" />
             Latest updates and stories from our students community
           </p>
-        </div>
+        </Reveal>
 
-        <article className="mt-6 rounded-2xl bg-white p-4 shadow-[0_16px_40px_-30px_rgba(14,35,71,0.45)] sm:p-5">
+        <Reveal from="left" as="article" className="mt-6 rounded-2xl bg-white p-4 shadow-[0_16px_40px_-30px_rgba(14,35,71,0.45)] sm:p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
             <img src={logo_alt} alt="" width={64} height={64} className="size-12 shrink-0 object-contain" />
             <div className="min-w-0 flex-1">
@@ -176,11 +177,11 @@ function StudentsNews() {
             <StoryImage image={featured.image} featured />
           </div>
           <StoryMeta article={featured} featured />
-        </article>
+        </Reveal>
 
-        <ul className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <RevealGroup className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
           {rest.map((article) => (
-            <li key={article.to}>
+            <RevealItem key={article.to} className="h-full">
               <article className="flex h-full flex-col rounded-2xl bg-white p-4 shadow-[0_16px_40px_-30px_rgba(14,35,71,0.45)] sm:p-5">
                 <div className="flex gap-3">
                   <img
@@ -205,9 +206,9 @@ function StudentsNews() {
                 </div>
                 <StoryMeta article={article} />
               </article>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </div>
     </section>
   )

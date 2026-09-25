@@ -1,4 +1,5 @@
 import { useId } from 'react'
+import Reveal from '@/components/motion/Reveal'
 import { Link } from 'react-router'
 import { ArrowRight, BookOpen, Calendar, ChevronDown, Users } from 'lucide-react'
 import { useReducedMotion } from 'framer-motion'
@@ -73,7 +74,7 @@ function CpdStatistics() {
       />
 
       <div className="relative mx-auto max-w-8xl px-4 sm:px-6">
-        <div className="flex items-start justify-between gap-6">
+        <Reveal className="flex items-start justify-between gap-6">
           <div>
             <div className="flex items-center gap-3">
               <span className="h-[3px] w-8 shrink-0 rounded-full bg-[#E11D2E]" aria-hidden="true" />
@@ -99,10 +100,10 @@ function CpdStatistics() {
             <p className="text-[12px] text-[#98A2B3]">Stronger Health Systems</p>
             <span className="mt-1.5 ml-auto block h-[2px] w-14 rounded-full bg-[#E11D2E]" />
           </div>
-        </div>
+        </Reveal>
 
         <div className="mt-8 grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.75fr)_minmax(240px,0.62fr)]">
-          <article className="rounded-[24px] border border-[#EEF1F4] bg-white px-4 py-5 shadow-[0_18px_40px_-28px_rgba(16,24,40,0.35)] sm:px-6">
+          <Reveal from="left" as="article" className="h-full rounded-[24px] border border-[#EEF1F4] bg-white px-4 py-5 shadow-[0_18px_40px_-28px_rgba(16,24,40,0.35)] sm:px-6">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <h3 className="text-[17px] font-bold text-[#101828]">Monthly CPD Statistics</h3>
@@ -219,9 +220,9 @@ function CpdStatistics() {
                 ))}
               </tbody>
             </table>
-          </article>
+          </Reveal>
 
-          <div className="flex flex-col gap-4">
+          <Reveal from="right" className="flex h-full flex-col gap-4" delay={0.12}>
             <article className="flex flex-1 items-center gap-4 rounded-[24px] border border-[#F6E4E8] bg-[#FFF7F8] px-5 py-5 shadow-[0_18px_40px_-28px_rgba(160,30,50,0.35)]">
               <span className="grid size-14 shrink-0 place-items-center rounded-full bg-[#FDE8EC] text-[#A32038]">
                 <BookOpen className="size-6" aria-hidden="true" />
@@ -259,10 +260,10 @@ function CpdStatistics() {
               <WceaMark />
               Powered By WCEA
             </a>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="mt-8 flex justify-center">
+        <Reveal className="mt-8 flex justify-center" delay={0.1}>
           <Link
             to="/services/cpd"
             className="inline-flex items-center gap-2 rounded-full bg-[#7A1E3C] px-7 py-3 text-[15px] font-semibold text-white shadow-[0_12px_24px_-14px_rgba(122,30,60,0.9)] transition-colors hover:bg-[#681833] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7A1E3C]"
@@ -270,7 +271,7 @@ function CpdStatistics() {
             Register for CPD Now
             <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

@@ -6,6 +6,7 @@ import {
   FiMonitor,
 } from 'react-icons/fi'
 import { hero_two } from '@/utils/images'
+import Reveal from '@/components/motion/Reveal'
 
 const resources = [
   {
@@ -50,7 +51,9 @@ export default function CpdTrainingBanner({
   portalHref = '/services/cpd',
 }) {
   return (
-    <section
+    <Reveal
+      from="fade"
+      as="section"
       aria-labelledby="cpd-banner-title"
       className="w-full overflow-hidden border-y border-[#d8e2ef] bg-white shadow-sm"
     >
@@ -142,6 +145,6 @@ export default function CpdTrainingBanner({
           </div>
         </div>
       </div>
-    </section>
+    </Reveal>
   )
 }

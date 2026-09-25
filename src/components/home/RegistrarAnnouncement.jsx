@@ -1,20 +1,23 @@
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
+import Reveal from '@/components/motion/Reveal'
 import { portrait } from '@/utils/images'
 
 function RegistrarAnnouncement() {
   return (
     <section className="bg-[#F6FBF7] py-12" aria-labelledby="registrar-announcement-heading">
       <div className="mx-auto grid max-w-8xl items-stretch gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.15fr)] lg:gap-12 xl:gap-16">
-        <img
-          src={portrait}
-          alt="Congratulations card for Mrs Philomina Adjoa Nyarkoa Woolley on her appointment as the sixth Registrar of the Nursing and Midwifery Council of Ghana."
-          width={1086}
-          height={1448}
-          className="h-auto w-full rounded-[28px] shadow-[0_24px_50px_-32px_rgba(20,80,40,0.55)]"
-        />
+        <Reveal from="left">
+          <img
+            src={portrait}
+            alt="Congratulations card for Mrs Philomina Adjoa Nyarkoa Woolley on her appointment as the sixth Registrar of the Nursing and Midwifery Council of Ghana."
+            width={1086}
+            height={1448}
+            className="h-auto w-full rounded-[28px] shadow-[0_24px_50px_-32px_rgba(20,80,40,0.55)]"
+          />
+        </Reveal>
 
-        <div className="flex h-full flex-col justify-between gap-5">
+        <Reveal from="right" className="flex h-full flex-col justify-between gap-5" delay={0.1}>
           <h2
             id="registrar-announcement-heading"
             className="text-[17px] leading-[1.35] font-bold text-[#1A1A1A] sm:text-[19px]"
@@ -67,7 +70,7 @@ function RegistrarAnnouncement() {
               <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

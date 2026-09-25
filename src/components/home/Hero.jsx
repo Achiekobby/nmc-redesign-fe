@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { RevealGroup, RevealItem } from '@/components/motion/Reveal'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 import {
   hero_one,
@@ -125,19 +126,39 @@ function Hero() {
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent lg:hidden" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[460px] max-w-8xl flex-col justify-center px-4 pt-8 pb-28 sm:px-6 lg:min-h-[560px] lg:py-20 lg:pr-[42%] lg:pb-32">
-          <p className="flex items-center gap-2.5 text-[12px] font-bold tracking-[0.16em] text-[#E31B23] uppercase">
+        <motion.div
+          className="relative mx-auto flex min-h-[460px] max-w-8xl flex-col justify-center px-4 pt-8 pb-28 sm:px-6 lg:min-h-[560px] lg:py-20 lg:pr-[42%] lg:pb-32"
+          initial={reduceMotion ? false : 'hidden'}
+          animate="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+          }}
+        >
+          <motion.p
+            className="flex items-center gap-2.5 text-[12px] font-bold tracking-[0.16em] text-[#E31B23] uppercase"
+            variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
+          >
             <span className="h-4 w-[3px] rounded-full bg-[#E31B23]" aria-hidden="true" />
             A safer, healthier Ghana
-          </p>
-          <h1 className="mt-4 max-w-[15ch] text-[2.15rem] leading-[1.08] font-extrabold tracking-[-0.03em] text-[#0E2347] sm:text-[2.75rem] lg:text-[3.15rem]">
+          </motion.p>
+          <motion.h1
+            className="mt-4 max-w-[15ch] text-[2.15rem] leading-[1.08] font-extrabold tracking-[-0.03em] text-[#0E2347] sm:text-[2.75rem] lg:text-[3.15rem]"
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
+          >
             Regulating Nursing and Midwifery Practice in Ghana
-          </h1>
-          <p className="mt-4 max-w-[34rem] text-[15px] leading-7 font-normal text-[#5C6770]">
+          </motion.h1>
+          <motion.p
+            className="mt-4 max-w-[34rem] text-[15px] leading-7 font-normal text-[#5C6770]"
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
+          >
             We set and maintain standards for nursing and midwifery education, training and
             practice to ensure quality, safe and competent care for all.
-          </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          </motion.p>
+          <motion.div
+            className="mt-7 flex flex-wrap items-center gap-3"
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
+          >
             <HeroButton to="/services/license-renewal" tone="red">
               Renew License
             </HeroButton>
@@ -147,8 +168,8 @@ function Hero() {
             <HeroButton to="/services/accreditation" tone="outline">
               Find Accredited Institutions
             </HeroButton>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
       </div>
 
@@ -167,16 +188,16 @@ function Hero() {
               <ArrowRight className="size-3.5" aria-hidden="true" />
             </Link>
           </div>
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <RevealGroup className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {services.slice(0, 4).map((service) => (
               <ServiceCard key={service.title} service={service} />
             ))}
-          </ul>
-          <ul className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
+          </RevealGroup>
+          <RevealGroup className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
             {services.slice(4).map((service) => (
               <ServiceCard key={service.title} service={service} />
             ))}
-          </ul>
+          </RevealGroup>
         </div>
       </div>
     </section>
@@ -185,7 +206,7 @@ function Hero() {
 
 function ServiceCard({ service }) {
   return (
-    <li>
+    <RevealItem className="h-full">
       <Link
         to={service.to}
         className="flex h-full items-center gap-3 rounded-xl border border-[#EEF1F6] bg-white px-3 py-3.5 transition-colors hover:border-[#D9E2F2]"
@@ -211,7 +232,7 @@ function ServiceCard({ service }) {
         </span>
         <ChevronRight className="size-4 shrink-0 text-[#98A2B3]" aria-hidden="true" />
       </Link>
-    </li>
+    </RevealItem>
   )
 }
 

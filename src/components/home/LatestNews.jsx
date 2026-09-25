@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import Reveal, { RevealGroup, RevealItem } from '@/components/motion/Reveal'
 import { ArrowRight, Calendar } from 'lucide-react'
 import { hero_one, hero_three, hero_two } from '@/utils/images'
 
@@ -41,7 +42,7 @@ function LatestNews() {
   return (
     <section className="bg-[#F4F7FB] pb-12" aria-labelledby="latest-news-heading">
       <div className="mx-auto max-w-8xl px-4 sm:px-6">
-        <div className="flex items-center justify-between gap-4">
+        <Reveal className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="h-6 w-[3px] shrink-0 rounded-full bg-[#E31B23]" aria-hidden="true" />
             <h2 id="latest-news-heading" className="text-lg font-bold text-[#0E2347] sm:text-xl">
@@ -55,11 +56,11 @@ function LatestNews() {
             View All News
             <ArrowRight className="size-3.5" aria-hidden="true" />
           </Link>
-        </div>
+        </Reveal>
 
-        <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <RevealGroup className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {articles.map((article) => (
-            <li key={article.to}>
+            <RevealItem key={article.to} className="h-full">
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#EEF1F6] bg-white shadow-[0_16px_40px_-32px_rgba(14,35,71,0.45)]">
                 <img
                   src={article.image}
@@ -86,9 +87,9 @@ function LatestNews() {
                   </Link>
                 </div>
               </article>
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
       </div>
     </section>
   )
